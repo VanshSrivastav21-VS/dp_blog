@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+
+
+{% block css %}
+<style>
+  body {
+    background: white;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+  <div class="col-lg-4 mx-auto">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId"
+          placeholder="Your Email">
+        <small id="HelpId" class="form-text text-muted">enter your registered email</small>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" id="password" aria-describedby="password"
+          placeholder="Your password">
+        <small id="HelpId" class="form-text text-muted">enter your password</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

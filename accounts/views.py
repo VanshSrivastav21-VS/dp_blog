@@ -5,13 +5,13 @@ from django.contrib import messages
 
 def register_view(request):
     #agar from submit hoto
-    if request.method =="POST":
+    if request.method == "POST":
         # form se data alag alag variable me store karo
-        username = request.Post.get('username')
-        email = request.Post.get('email')
-        password = request.Post.get('password')
-        cpassword = request.Post.get('cpassword')
-        if password != cpassword and len(password) == 0 or len(cpassword) == 0:
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('pass')
+        cpassword = request.POST.get('cpass')
+        if password != cpassword or len(password) == 0 or len(cpassword) == 0:
             messages.error(request, "Password do not match")
             return redirect('register')
         #user create karo
@@ -24,9 +24,9 @@ def register_view(request):
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get('email')
-        password = request.POST.get('password')
+        password = request.POST.get('pass')
         if len(email) == 0 or len(password) == 0:
-           messages.error(request, "Invalid credebtialist")
+           messages.error(request, "Bad Login details!")
            return redirect('login')
         #user authentication karo
         user = authenticate(request, email=email, password=password)
@@ -35,7 +35,7 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Invalid creadebtals!")
+            messages.error(request, "Invalid credentials!")
             return redirect('login')
     else:
         return render(request, 'accounts/login.html')
@@ -45,7 +45,7 @@ def logout_view(request):
     messages.success(request, "Logged out successfully")
     return redirect('login')
 
-def profile_view(request):
+def profile(request):
     return render(request, 'accounts/profile.html')
 
 
